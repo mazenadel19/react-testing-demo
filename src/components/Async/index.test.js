@@ -3,6 +3,11 @@ import Async from ".";
 
 describe("Async Component", () => {
   test("render list items if request succeed", async () => {
+    window.fetch = jest.fn();
+    window.fetch.mockResolvedValueOnce({
+      json: async () => [{ id: "1", title: "title1" }],
+    });
+
     // arrange
     render(<Async />);
 
@@ -16,3 +21,4 @@ describe("Async Component", () => {
 });
 
 // get by role fail if i have more than one item by that role
+// findAllByRole returns a promise
